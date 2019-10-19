@@ -1,16 +1,25 @@
 {
-  "name": "restserver",
+  "name": "resvit-backander",
   "version": "1.0.0",
-  "description": "",
+  "description": "backend of resvit ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node server/server.js"
+    "start": "node server/server"
   },
-  "author": "",
+  "author": "anderson laverde",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+<<<<<<< HEAD
+    "mongoose": "^5.7.5",
+=======
+    "mongodb": "^3.3.3",
+>>>>>>> 370c4575d95ffcf3b781522344fd0fc22d2fb373
+    "mssql": "^5.1.0",
+    "nodemon": "^1.19.2",
+    "sqlite3": "^4.1.0",
+    "tedious": "^6.4.0"
   }
 }

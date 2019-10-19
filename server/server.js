@@ -2,39 +2,39 @@ require('./config/config');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const sqlite3 = require('sqlite3').verbose()
 
+
+//////////////////////////////////////////
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
 app.use(bodyParser.json());
+app.use( require('./routes/usuario'));
 
-app.get('/usuario',function(req,res){
-    res.json('get usuario');
 
-});
-app.post('/usuario',function(req,res){
-    let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
 
-    if(body.nombre === undefined){ //asi respondo si las peticiones son buenas o malas
-        res.status(400).json({
-            ok:false,
-            mensaje:'EL nombre es necesario'
-        });
-    }else{
-        res.json({
-            persona:body
-        });
-    }
-    
 
-});
-app.put('/usuario/:id',function(req,res){
-    let id = req.params.id;
-    res.json({
-        id
-    });
 
+
+/*
+mongoose.connect('mongodb://181.50.100.167:27017/test', {
+    useNewUrlParser: true,
+    user: 'admi',
+    pass: 'rucay2019'
+}).then(() => {
+    console.log('successfully connected to the database');
+}).catch(err => {
+    console.log('error connecting to the database');
+    process.exit();
+});*/
+
+mongoose.connect('mongodb://localhost:27017/resturant', (err)=>{
+
+  if(err) throw err;
+  console.log(`Base de datos mela`);
 });
 
 
