@@ -1,27 +1,9 @@
 const express = require('express');
 const app = express();
 const Usuario = require('../models/usuario');
+const bcrypt = require('bcrypt');
 //////////////////////////////////////
-app.get('/authenticate',function(req,res){
-  let body = req.body;//Body request
-  if(body.id==undefined){
-    req.status(400).json({
-      ok:false,
-      response:1,
-      content:'User Id is require for petition'
-    });
-  }else{
-    ///I need to put the query of autentication here
-    db.serialize(function(){ 
-      db.each("SELECT id FROM users", function(err, row) {
-          console.log("User id : "+row.id);
-      });
-    });
-    res.json({
-      user:id
-    });
-  }
-});
+
 
 app.get('/usuario',function(req,res){
   let id = req.params.id;
@@ -31,25 +13,26 @@ app.get('/usuario',function(req,res){
 });
 
 app.post('/usuario',function(req,res){
-    let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
+    let body = req.body;//asi leo lo que hay en el Body de la peticion post, debe usarse body parser de npm
     let usuario = new Usuario({
       nombre : body.nombre,
       email : body.email,
-      password : body.password,
+      password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
       role: body.role
     });
     
     usuario.save((err,usuarioDB)=>{
       //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
       if(err){
-        return response.status(400).json({
-          ok:false,
-          err
+        return res.status(400).json({
+          response:1,
+          content:err
         });
       }
+        //usuarioDB.password = null; //not interested in show encrypted pass in 
         res.json({
-          ok:true,
-          usuario: usuarioDB
+          response:2,
+          content: usuarioDB
         });
       
     });    

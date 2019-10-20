@@ -10,13 +10,11 @@
   "author": "anderson laverde",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-<<<<<<< HEAD
     "mongoose": "^5.7.5",
-=======
-    "mongodb": "^3.3.3",
->>>>>>> 370c4575d95ffcf3b781522344fd0fc22d2fb373
+    "mongoose-unique-validator": "^2.0.3",
     "mssql": "^5.1.0",
     "nodemon": "^1.19.2",
     "sqlite3": "^4.1.0",
