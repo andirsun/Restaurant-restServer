@@ -38,11 +38,12 @@ let usuarioSchema = new Schema({
         default:false
     }
 });
-usuarioSchema.methods.toJson = function(){//es para no devolver nunca el pass en la respuesta
+
+
+usuarioSchema.methods.toJSON = function(){//es para no devolver nunca el pass en la respuesta
     let user = this;
     let userObject = user.toObject();
     delete userObject.password;
-
     return userObject;
 }
 usuarioSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'});
