@@ -6,7 +6,7 @@ const _=require('underscore');
 //////////////////////////////////////
 
 
-app.get('/usuario',function(req,usuarios){
+app.get('/getusuario',function(req,usuarios){
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
   desde = Number(desde);
 
@@ -16,22 +16,18 @@ app.get('/usuario',function(req,usuarios){
   Usuario.find({})
         .skip(desde)//avoid this number or records 
         .limit(5)//show this number of records after skip n records 
-        .exec((err,res)=>{
+        .exec((err,resMongoose)=>{
             if(err){
-              return res.status(400).json({
+              return resMongoose.status(400).json({
                 response:1,
                 content:err
               });
             }
-            res.json({
-              response : 2,
-              usuarios
-            });
-          })
-  let id = req.params.id;
-  res.json({
-      id:1
-  });
+            if(resMongoose){
+              data = {resMongoose};
+            }
+            usuarios.json(data);
+          });
 });
 
 app.post('/usuario',function(req,res){
